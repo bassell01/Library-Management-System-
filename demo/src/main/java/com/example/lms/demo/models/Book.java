@@ -1,6 +1,5 @@
 package com.example.lms.demo.models;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +16,8 @@ public class Book {
     private String author;
     private String genre;
     private float price;
+
+    private String imageUrl;
+
+    private int quantity; // New field
 }
