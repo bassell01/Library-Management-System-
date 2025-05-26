@@ -257,13 +257,16 @@
   <main>
     <section id="books" class="tab-content active" aria-label="Manage Books Section">
       <h2>Manage Books</h2>
-      <form id="book-form" aria-label="Add new book form">
-        <input type="text" placeholder="Title" required aria-required="true" />
-        <input type="text" placeholder="Author" required aria-required="true" />
-        <input type="text" placeholder="Genre" required aria-required="true" />
-        <input type="number" placeholder="Price" min="0" step="0.01" required aria-required="true" />
+      <form id="book-form" aria-label="Add new book form" enctype="multipart/form-data">
+        <input type="text" placeholder="Title" required aria-required="true" name="title" />
+        <input type="text" placeholder="Author" required aria-required="true" name="author" />
+        <input type="text" placeholder="Genre" required aria-required="true" name="genre" />
+        <input type="number" placeholder="Price" min="0" step="0.01" required aria-required="true" name="price" />
+        <input type="number" name="quantity" placeholder="Quantity" min="0" required>
+        <input type="file" accept="image/*" required aria-required="true" name="image" />
         <button type="submit">Add Book</button>
       </form>
+      
       <table aria-describedby="bookTableCaption">
         <caption id="bookTableCaption" class="sr-only">List of books with editable details and actions</caption>
         <thead>
@@ -314,10 +317,13 @@
           books.forEach(book => {
             const row = document.createElement('tr');
             row.innerHTML = `
+            <td><img src="${book.imageUrl}" alt="${book.title}" width="60" style="border-radius: 8px; margin-bottom: 6px;"><br><input value="${book.title}" data-id="${book.bookId}" data-field="title"></td>
+        
               <td><input value="${book.title}" data-id="${book.bookId}" data-field="title" aria-label="Book Title"></td>
               <td><input value="${book.author}" data-id="${book.bookId}" data-field="author" aria-label="Book Author"></td>
               <td><input value="${book.genre}" data-id="${book.bookId}" data-field="genre" aria-label="Book Genre"></td>
               <td><input type="number" value="${book.price}" data-id="${book.bookId}" data-field="price" aria-label="Book Price" step="0.01" min="0"></td>
+              <td><input type="number" value="${book.quantity}" data-id="${book.bookId}" data-field="quantity" min="0"></td>
               <td>
                 <button onclick="updateBook(${book.bookId})" aria-label="Save book ${book.title}">Save</button>
                 <button onclick="deleteBook(${book.bookId})" aria-label="Delete book ${book.title}">Delete</button>
@@ -348,6 +354,22 @@
         fetchBooks();
       });
     });
+
+    bookForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const formData = new FormData(bookForm);
+
+  fetch('/api/books', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(() => {
+    bookForm.reset();
+    fetchBooks();
+  });
+});
+
 
     window.deleteBook = function(id) {
       if(confirm('Are you sure you want to delete this book?')) {
