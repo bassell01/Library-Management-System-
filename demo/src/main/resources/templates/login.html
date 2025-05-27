@@ -1,19 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8" />
+  <title>Login - Riwaya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<div class="form-container">
-    <h2>Login</h2>
-    <form method="post" action="/auth/login">
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="/auth/signup">Sign Up</a></p>
-    
+ <div class="overlay">
+  <div class="container">
+    <div class="left-section">
+      <!-- إضافة اللوجو -->
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" style="height:80px; margin-bottom:15px;" />
+      
+      <h1>Riwaya</h1>
+      <p id="greeting" class="subtitle"></p>
+      <a href="/auth/signup">Sign Up</a>
+    </div>
+    <div class="right-section">
+      <h2 class="animated-title">Login</h2>
+      <p class="subtitle">Please enter your credentials to log in.</p>
+      <form action="#" th:action="@{/auth/login}" method="post" onsubmit="return validateLoginForm(event)">
+        <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit" class="btn-black">Login</button>
+      </form>
+    </div>
+  </div>
 </div>
+
+
+  <script>
+    // Dynamic Greeting
+    const greeting = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    if(hour < 12) {
+      greeting.textContent = 'Good Morning!';
+    } else if(hour < 18) {
+      greeting.textContent = 'Good Afternoon!';
+    } else {
+      greeting.textContent = 'Good Evening!';
+    }
+
+    // Simple form validation with alert
+    function validateLoginForm(event) {
+      let errors = [];
+      const form = event.target;
+
+      if (!form.username.value.trim()) errors.push("Username is required");
+      if (!form.password.value.trim()) errors.push("Password is required");
+
+      if(errors.length > 0){
+        event.preventDefault();
+        alert(errors.join("\n"));
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>

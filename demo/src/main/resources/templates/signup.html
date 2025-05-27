@@ -1,20 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8" />
+  <title>Sign Up - Riwaya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<div class="form-container">
-    <h2>Register</h2>
-    <form method="post" action="/auth/signup">
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <input type="text" name="address" placeholder="Address" required />
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already registered? <a href="/auth/login">Login</a></p>
-    
-</div>
+  <div class="overlay">
+    <div class="container">
+      <div class="left-section">
+        <!-- شعار Riwaya -->
+        <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
+        
+        <h1>Riwaya</h1>
+        <p id="greeting" class="subtitle"></p>
+        <a href="/auth/login">Login</a>
+      </div>
+      <div class="right-section">
+        <h2 class="animated-title">Sign Up</h2>
+        <p class="subtitle">Create your Riwaya account</p>
+        <form action="#" th:action="@{/auth/signup}" method="post" onsubmit="return validateForm(event)">
+          <input type="text" name="name" placeholder="Full Name" />
+          <input type="email" name="email" placeholder="Email" />
+          <input type="text" name="phone" placeholder="Phone Number" />
+          <input type="text" name="address" placeholder="Address" />
+          <input type="text" name="username" placeholder="Username" />
+          <input type="password" name="password" placeholder="Password" />
+          <button type="submit" class="btn-black">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dynamic Greeting
+    const greeting = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    if(hour < 12) {
+      greeting.textContent = 'Good Morning!';
+    } else if(hour < 18) {
+      greeting.textContent = 'Good Afternoon!';
+    } else {
+      greeting.textContent = 'Good Evening!';
+    }
+
+    // Simple form validation with alert
+    function validateForm(event) {
+      let errors = [];
+      const form = event.target;
+
+      if (!form.name.value.trim()) errors.push("Full Name is required");
+      if (!form.email.value.trim()) errors.push("Email is required");
+      else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(form.email.value.trim())) errors.push("Invalid Email");
+      }
+      if (!form.phone.value.trim()) errors.push("Phone Number is required");
+      if (!form.address.value.trim()) errors.push("Address is required");
+      if (!form.username.value.trim()) errors.push("Username is required");
+      if (!form.password.value.trim()) errors.push("Password is required");
+      else if (form.password.value.trim().length < 6) errors.push("Password must be at least 6 characters");
+
+      if(errors.length > 0){
+        event.preventDefault();
+        alert(errors.join("\n"));
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>

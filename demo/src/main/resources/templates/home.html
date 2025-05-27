@@ -1,14 +1,137 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Member Home</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8" />
+  <title>Riwaya Library - Home</title>
+  <link rel="stylesheet" href="/css/home.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-<div class="home-container">
-    <h1 th:text="'Welcome, ' + ${user.username} + '!'">Welcome, Username!</h1>
-    <p th:text="'Your address is: ' + ${user.address}">Your address is: Address</p>
-    <a href="/auth/logout">Logout</a>
-</div>
+
+<!-- 1. Navbar -->
+<header class="header">
+  <div class="container">
+    <a href="/" class="logo-link">
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li class="dropdown" th:if="${session.user == null}">
+          <a href="#" class="dropbtn">Account ▼</a>
+          <div class="dropdown-content">
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+          </div>
+        </li>
+        <li th:if="${session.user != null}">
+          <a href="/logout">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- 2. Banner Section -->
+<section class="banner">
+  <div class="overlay"></div>
+  <div class="banner-content container">
+    <h2>More than 356,718 books Over Here</h2>
+    <p>Riwaya Library offers an extensive collection of books across various genres to inspire every reader.</p>
+    <form class="search-form" action="/books/search" method="get">
+      <input type="text" name="q" placeholder="Search books..." required />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</section>
+
+<!-- 3. Discover Books -->
+<section class="discover-books container" th:if="${randomBooks != null and #lists.isNotEmpty(randomBooks)}">
+  <h2>Discover Books</h2>
+  <p>Number of books: <span th:text="${#lists.size(randomBooks)}">0</span></p>
+
+  <div class="books-grid">
+    <div th:each="book : ${randomBooks}" class="book-card">
+      <div class="book-info">
+        <h3 th:text="${book.title}">Book Title</h3>
+        <p><strong>Author:</strong> <span th:text="${book.author}">Author Name</span></p>
+        <p><strong>Genre:</strong> <span th:text="${book.genre}">Genre</span></p>
+        <p><strong>Price:</strong> $<span th:text="${book.price}">0.00</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. About Riwaya -->
+<section class="about-riwaya container">
+  <img src="/uploads/DarkAcademiaLibraries_VictoriaAlbertLibrary-1-of-1.jpg" alt="About Riwaya" />
+  <div class="about-text">
+    <h2>About Riwaya Library</h2>
+    <p>Riwaya is a public library dedicated to providing access to thousands of books and resources for readers of all ages. Our mission is to ignite imagination and promote knowledge through literature.</p>
+  </div>
+</section>
+
+<!-- 6. Need Help -->
+<section class="need-help container">
+  <h2>Need Help?</h2>
+  <div class="help-boxes">
+    <div class="help-box">
+      <h3>Account Support</h3>
+      <p>Need help with your account? Contact our support team anytime.</p>
+    </div>
+    <div class="help-box">
+      <h3>Book Recommendations</h3>
+      <p>Looking for a good read? Let us help you find books tailored to your taste.</p>
+    </div>
+    <div class="help-box">
+      <h3>General Inquiries</h3>
+      <p>Have questions? We're here to answer all your library-related queries.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Footer -->
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-logo">
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
+    </div>
+    <div class="footer-section about">
+      <h3>Riwaya Library</h3>
+      <p>Your gateway to knowledge and stories. Join us and dive into the world of books.</p>
+    </div>
+    <div class="footer-section links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h4>Contact Us</h4>
+      <p>Email: support@riwaya.com</p>
+      <p>Phone: +123 456 7890</p>
+      <p>Address: 123 Library St., Book City</p>
+    </div>
+    <div class="footer-section social">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" class="social-icon facebook"></a>
+        <a href="#" aria-label="Twitter" class="social-icon twitter"></a>
+        <a href="#" aria-label="Instagram" class="social-icon instagram"></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Riwaya Library. All rights reserved.</p>
+  </div>
+</footer>
+
 </body>
 </html>
