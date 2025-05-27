@@ -17,9 +17,9 @@
         <p class="author" th:text="'by ' + ${book.author}">Author Name</p>
         <p class="genre" th:text="${book.genre}">Genre</p>
         <p class="price" th:text="'$' + ${book.price}">Price</p>
-        <p class="quantity" th:text="'Available: ' + ${book.quantity}">Available quantity</p>
 
-        <form th:action="@{/books/{id}/transaction(id=${book.bookId})}" method="post" class="transaction-form">
+
+        <form th:action="@{/checkout/{bookId}(bookId=${book.bookId})}" method="get" class="transaction-form">
             <button type="submit" name="type" value="borrow">Borrow</button>
             <button type="submit" name="type" value="purchase">Buy</button>
         </form>
