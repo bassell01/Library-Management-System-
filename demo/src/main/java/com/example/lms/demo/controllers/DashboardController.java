@@ -1,15 +1,16 @@
 package com.example.lms.demo.controllers;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.lms.demo.models.Transactions;
 import com.example.lms.demo.models.User;
-import com.example.lms.demo.repositories.UserRepository;
+import com.example.lms.demo.services.TransactionsService;
+import com.example.lms.demo.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -17,34 +18,38 @@ import jakarta.servlet.http.HttpSession;
 public class DashboardController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    @Autowired
+    private TransactionsService transactionsService;
 
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
-        
-        User user = (User) session.getAttribute("loggedInUser");
+        User user = userService.getLoggedInUser(session);
 
-        
         if (user == null) {
             return "redirect:/login";
         }
 
-        
         model.addAttribute("user", user);
-
-        return "dashboard"; 
+        return "dashboard";
     }
 
-    @GetMapping("/dashboard/{userId}")
-    public String dashboard(@PathVariable Long userId, Model model) {
-        Optional<User> userOpt = userRepository.findById(userId);
+    
 
-        if (userOpt.isPresent()) {
-            model.addAttribute("user", userOpt.get());
-            return "dashboard";  
-        } else {
-            return "error";  
-        
-        }
+
+    @GetMapping("/dashboard/history")
+public String userHistory(HttpSession session, Model model) {
+    User user = userService.getLoggedInUser(session);
+
+    if (user == null) {
+        return "redirect:/login";
     }
+
+    List<Transactions> history = transactionsService.getHistoryForUser(user);
+    model.addAttribute("user", user);
+    model.addAttribute("history", history);
+
+    return "dashboard-history"; 
+}
 }
