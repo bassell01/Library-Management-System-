@@ -25,7 +25,7 @@ public class AdminDashboardController {
     @Autowired
     private UserRepository userRepository;
 
-    private static final String UPLOAD_DIR = "src/main/resources/static/uploads/";
+    private static final String UPLOAD_DIR = "demo\\src\\main\\resources\\static\\uploads";
 
     @GetMapping("/Admin")
     public String showAdminDashboard() {

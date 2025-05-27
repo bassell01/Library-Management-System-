@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${book.title} + ' - Book Details'">Book Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/book-details.css">
+</head>
+<body>
+
+<div class="book-details-container">
+    <div class="book-image">
+        <img th:src="${book.imageUrl}" alt="Book Cover">
+
+    </div>
+    <div class="book-info">
+        <h2 th:text="${book.title}">Book Title</h2>
+        <p class="author" th:text="'by ' + ${book.author}">Author Name</p>
+        <p class="genre" th:text="${book.genre}">Genre</p>
+        <p class="price" th:text="'$' + ${book.price}">Price</p>
+
+
+        <form th:action="@{/checkout/{bookId}(bookId=${book.bookId})}" method="get" class="transaction-form">
+            <button type="submit" name="type" value="borrow">Borrow</button>
+            <button type="submit" name="type" value="purchase">Buy</button>
+        </form>
+        
+    </div>
+</div>
+
+</body>
+</html>
+

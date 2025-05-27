@@ -1,0 +1,130 @@
+.book-details-container {
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.book-image img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    object-fit: cover;
+}
+
+.book-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-info h2 {
+    margin-top: 0;
+    font-size: 2.2rem;
+    color: #222;
+}
+
+.book-info .author {
+    font-style: italic;
+    color: #555;
+    margin: 8px 0 16px 0;
+}
+
+.book-info p {
+    font-size: 1.1rem;
+    margin: 6px 0;
+    color: #333;
+}
+
+.book-info .price {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.3rem;
+    margin-top: 12px;
+}
+
+.book-info .quantity {
+    font-weight: 600;
+    color: #28a745;
+}
+
+.actions {
+    margin-top: 24px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 16px;
+    display: inline-block;
+}
+
+.borrow-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: 2px solid #007bff;
+}
+
+.borrow-btn:hover {
+    background-color: #436a94;
+    border-color: #3e5f83;
+
+}
+
+.buy-btn {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #28a745;
+}
+
+.buy-btn:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+.transaction-form {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.transaction-form button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white;
+}
+
+.transaction-form button[value="borrow"] {
+    background-color: #738ad4;
+    color: #ffffff;
+}
+
+.transaction-form button[value="borrow"]:hover {
+    background-color: #6478b9;
+    transform: scale(1.05);
+}
+
+.transaction-form button[value="purchase"] {
+    background-color: #28a745;
+}
+
+.transaction-form button[value="purchase"]:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
