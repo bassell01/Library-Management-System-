@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
 import org.springframework.http.MediaType;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.List;
@@ -65,7 +64,7 @@ public class AdminDashboardController {
         book.setGenre(genre);
         book.setPrice(price);
         book.setQuantity(quantity);
-        book.setImageUrl("/uploads/" + filename);
+        book.setImageUrl("/uploads/" + filename); // This URL should work as long as the image is inside /static/uploads
 
         return bookRepository.save(book);
     }
