@@ -2,35 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User History</title>
+    <link rel="stylesheet" type="text/css" href="/css/history.css">
 </head>
 <body>
-    <h1>Welcome, <span th:text="${user.username}"></span></h1>
+    <div class="container">
+        
 
-    <h2>Book Transaction History</h2>
+        <h1>Book Transaction History</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Book Title</th>
-                <th>Author</th>
-                <th>Type</th>
-                <th>Date Issued</th>
-                <th>Due Date</th>
-                <th>Payment Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="transaction : ${history}">
-                <td th:text="${transaction.book.title}">Title</td>
-                <td th:text="${transaction.book.author}">Author</td>
-                <td th:text="${transaction.type}">Type</td>
-                <td th:text="${transaction.dateIssued}">Issued</td>
-                <td th:text="${transaction.dueDate}">Due</td>
-                <td th:text="${transaction.paymentStatus}">Status</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Date Issued</th>
+                    <th>Due Date</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${history}">
+                    <td th:text="${transaction.book.title}">Title</td>
+                    <td th:text="${transaction.book.author}">Author</td>
+                    <td th:text="${transaction.type}">Type</td>
+                    <td th:text="${transaction.dateIssued}">Issued</td>
+                    <td th:text="${transaction.dueDate}">Due</td>
+                    <td th:text="${transaction.paymentStatus}">Status</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a th:href="@{/dashboard}">Back to Dashboard</a>
+        <a th:href="@{/dashboard}" class="back-btn">Back to Dashboard</a>
+    </div>
 </body>
 </html>

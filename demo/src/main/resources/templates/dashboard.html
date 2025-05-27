@@ -6,14 +6,24 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome, <span th:text="${user.username}">User</span>!</h1>
-
-    <p><span class="label">User ID:</span> <span th:text="${user.userId}"></span></p>
-    <p><span class="label">Username:</span> <span th:text="${user.username}"></span></p>
-    <p><span class="label">Address:</span> <span th:text="${user.address}"></span></p>
-    <a th:href="@{/dashboard/history}">View History</a>
-</div>
+    <header>
+        <h1>Welcome, <span th:text="${user.username}">User</span>!</h1>
+    </header>
+    
+    <div class="container">
+        <div class="user-info">
+            <p><span class="label">User ID:</span> <span th:text="${user.userId}"></span></p>
+            <p><span class="label">Username:</span> <span th:text="${user.username}"></span></p>
+            <p><span class="label">Address:</span> <span th:text="${user.address}"></span></p>
+        </div>
+    
+        <div class="button-group">
+            <a th:href="@{/member/home}" class="btn">Home</a>
+            <a th:href="@{/dashboard/history}" class="btn">View History</a>
+        </div>
+    </div>
     
 </body>
+    
+    
 </html>
