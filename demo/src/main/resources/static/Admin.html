@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: #2f4f80;
+    background: #63442d;
     color: white;
     font-weight: 700;
     font-size: 1.8rem;
@@ -43,7 +43,7 @@
   }
 
   .logout-btn {
-    background-color: #f05454;
+    background-color: white#f05454;
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 8px;
@@ -53,13 +53,13 @@
     transition: background-color 0.3s ease;
   }
   .logout-btn:hover {
-    background-color: #d94343;
+    background-color: #63442d;
   }
 
   nav {
     display: flex;
     background-color: #f1f4f8;
-    border-bottom: 2px solid #2f4f80;
+    border-bottom: 2px solid #63442d;
   }
 
   .tab {
@@ -70,7 +70,7 @@
     border: none;
     background: transparent;
     cursor: pointer;
-    color: #2f4f80;
+    color: #63442d;
     transition: all 0.3s ease;
     border-bottom: 3px solid transparent;
   }
@@ -80,9 +80,9 @@
   }
 
   .tab.active {
-    background-color: #2f4f80;
+    background-color: #63442d;
     color: white;
-    border-bottom: 3px solid #f05454;
+    border-bottom: 3px solid #63442d;
   }
 
   main {
@@ -95,7 +95,7 @@
     margin-top: 0;
     font-weight: 700;
     font-size: 1.6rem;
-    color: #2f4f80;
+    color: #63442d;
     margin-bottom: 1.5rem;
   }
 
@@ -116,13 +116,13 @@
   }
   form input:focus {
     outline: none;
-    border-color: #2f4f80;
+    border-color: #63442d;
     box-shadow: 0 0 6px rgba(47,79,128,0.4);
   }
 
   form button {
     flex-shrink: 0;
-    background-color: #2f4f80;
+    background-color: #63442d;
     color: white;
     border: none;
     border-radius: 12px;
@@ -132,7 +132,7 @@
     transition: background-color 0.3s ease;
   }
   form button:hover {
-    background-color: #f05454;
+    background-color: #63442d;
   }
 
   table {
@@ -142,7 +142,7 @@
   }
 
   thead tr th {
-    background-color: #2f4f80;
+    background-color: #63442d;
     color: white;
     padding: 12px 15px;
     text-align: left;
@@ -175,14 +175,14 @@
     transition: border-color 0.25s ease;
   }
   tbody tr td input:focus {
-    border-color: #2f4f80;
+    border-color: #63442d;
     background-color: #fff;
     outline: none;
     box-shadow: 0 0 5px rgba(47,79,128,0.4);
   }
 
   tbody tr td button {
-    background-color: #2f4f80;
+    background-color: #63442d;
     border: none;
     color: white;
     padding: 6px 12px;
@@ -193,7 +193,7 @@
     transition: background-color 0.3s ease;
   }
   tbody tr td button:hover {
-    background-color: #f05454;
+    background-color: #63442d;
   }
 
   tbody tr td button:last-child {
@@ -212,7 +212,7 @@
     background: #f1f4f8;
   }
   main::-webkit-scrollbar-thumb {
-    background-color: #2f4f80;
+    background-color: #63442d;
     border-radius: 10px;
   }
 
@@ -248,7 +248,7 @@
   <div class="dashboard-container">
     <header>
       <div>Admin Dashboard</div>
-      <button class="logout-btn">Logout</button>
+      <button class="logout-btn" onclick="window.location.href='http://localhost:8081/auth/login'">Logout</button>
     </header>
     <nav>
       <button class="tab active" onclick="switchTab('books')">Books</button>
@@ -268,7 +268,7 @@
         </form>
         
         <table aria-describedby="bookTableCaption">
-          <caption id="bookTableCaption" class="sr-only">List of books with editable details and actions</caption>
+          <caption id="bookTableCaption" class="sr-only">Available Books</caption>
           <thead>
             <tr>
               <th>Image</th>
@@ -286,7 +286,7 @@
       <section id="members" class="tab-content" aria-label="Manage Members Section" hidden>
         <h2>Manage Members</h2>
         <table aria-describedby="memberTableCaption">
-          <caption id="memberTableCaption" class="sr-only">List of members with editable details and actions</caption>
+          <caption id="memberTableCaption" class="sr-only">Available Members</caption>
           <thead>
             <tr><th>Username</th><th>Address</th><th>Actions</th></tr>
           </thead>
