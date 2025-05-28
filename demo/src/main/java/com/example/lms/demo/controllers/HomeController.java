@@ -32,8 +32,6 @@ public class HomeController {
             model.addAttribute("randomBooks", Collections.emptyList());
         }
 
-        return "home";  // Make sure this matches the Thymeleaf template name home.html (without .html)
+        return "home";  // home.html
     }
 }
-
-

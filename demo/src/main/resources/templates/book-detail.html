@@ -1,32 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
     <title th:text="${book.title} + ' - Book Details'">Book Details</title>
-    <link rel="stylesheet" type="text/css" href="/css/book-details.css">
+    <link rel="stylesheet" type="text/css" href="/css/book-details.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
 
-<div class="book-details-container">
-    <div class="book-image">
-        <img th:src="${book.imageUrl}" alt="Book Cover">
+<!-- Header -->
+<header class="header">
+  <div class="container header-container">
+    <a href="home.html" class="logo-link">
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
+    </a>
+  </div>
+</header>
 
-    </div>
-    <div class="book-info">
-        <h2 th:text="${book.title}">Book Title</h2>
-        <p class="author" th:text="'by ' + ${book.author}">Author Name</p>
-        <p class="genre" th:text="${book.genre}">Genre</p>
-        <p class="price" th:text="'$' + ${book.price}">Price</p>
+<div class="container book-details-wrapper">
+
+  <!-- Back arrow -->
+  <a href="/books" class="back-arrow" aria-label="Back to books list">&#8592; Back to Books</a>
+
+  <div class="book-details-container">
+      <div class="book-image">
+          <img th:src="${book.imageUrl}" alt="Book Cover" />
+      </div>
+      <div class="book-info">
+  <h2><strong>Book Name:</strong> <span th:text="${book.title}">Book Title</span></h2>
+  <p><strong>Author Name:</strong> <span th:text="${book.author}">Author Name</span></p>
+  <p><strong>Genre:</strong> <span th:text="${book.genre}">Genre</span></p>
+  <p><strong>Price:</strong> $<span th:text="${book.price}">0.00</span></p>
 
 
-        <form th:action="@{/checkout/{bookId}(bookId=${book.bookId})}" method="get" class="transaction-form">
-            <button type="submit" name="type" value="borrow">Borrow</button>
-            <button type="submit" name="type" value="purchase">Buy</button>
-        </form>
-        
-    </div>
+          <form th:action="@{/checkout/{bookId}(bookId=${book.bookId})}" method="get" class="transaction-form">
+              <button type="submit" name="type" value="borrow" class="btn borrow-btn">Borrow</button>
+              <button type="submit" name="type" value="purchase" class="btn buy-btn">Buy</button>
+          </form>
+      </div>
+  </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-logo">
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
+    </div>
+    <div class="footer-section about">
+      <h3>Riwaya Library</h3>
+      <p>Your gateway to knowledge and stories. Join us and dive into the world of books.</p>
+    </div>
+    <div class="footer-section links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="About.html">About Us</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h4>Contact Us</h4>
+      <p>Email: support@riwaya.com</p>
+      <p>Phone: +123 456 7890</p>
+      <p>Address: 123 Library St., Book City</p>
+    </div>
+    <div class="footer-section social">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" class="social-icon facebook"></a>
+        <a href="#" aria-label="Twitter" class="social-icon twitter"></a>
+        <a href="#" aria-label="Instagram" class="social-icon instagram"></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Riwaya Library. All rights reserved.</p>
+  </div>
+</footer>
 
 </body>
 </html>
-

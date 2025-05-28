@@ -28,28 +28,25 @@ public class DashboardController {
         User user = userService.getLoggedInUser(session);
 
         if (user == null) {
-            return "redirect:/login";
+            return "redirect:/auth/login";
         }
 
         model.addAttribute("user", user);
         return "dashboard";
     }
 
-    
-
-
     @GetMapping("/dashboard/history")
-public String userHistory(HttpSession session, Model model) {
-    User user = userService.getLoggedInUser(session);
+    public String userHistory(HttpSession session, Model model) {
+        User user = userService.getLoggedInUser(session);
 
-    if (user == null) {
-        return "redirect:/login";
+        if (user == null) {
+            return "redirect:/auth/login";
+        }
+
+        List<Transactions> history = transactionsService.getHistoryForUser(user);
+        model.addAttribute("user", user);
+        model.addAttribute("history", history);
+
+        return "dashboard-history";
     }
-
-    List<Transactions> history = transactionsService.getHistoryForUser(user);
-    model.addAttribute("user", user);
-    model.addAttribute("history", history);
-
-    return "dashboard-history"; 
-}
 }

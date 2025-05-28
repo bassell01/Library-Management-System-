@@ -1,11 +1,7 @@
 package com.example.lms.demo.controllers;
 
-import com.example.lms.demo.dtos.LoginRequest;
-import com.example.lms.demo.dtos.SignupRequest;
-import com.example.lms.demo.models.User;
-import com.example.lms.demo.repositories.UserRepository;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,10 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import com.example.lms.demo.dtos.LoginRequest;
+import com.example.lms.demo.dtos.SignupRequest;
+import com.example.lms.demo.models.User;
+import com.example.lms.demo.repositories.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
-
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -79,8 +80,8 @@ public class AuthController {
 
         if (userOptional.isPresent() &&
             passwordEncoder.matches(loginRequest.getPassword(), userOptional.get().getPassword())) {
-            session.setAttribute("loggedInUser", userOptional.get());
-            return "redirect:/member/home";
+            session.setAttribute("user", userOptional.get()); // Keep "user" key for Thymeleaf compatibility
+            return "redirect:/member/home"; // Or any secured page
         }
 
         model.addAttribute("error", "Invalid credentials.");

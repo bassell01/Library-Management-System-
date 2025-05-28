@@ -33,11 +33,13 @@ public class CheckoutController {
     @Autowired
     private PaymentRepository paymentRepository;
 
-
     @GetMapping("/{bookId}")
-    public String checkoutPage(@PathVariable Long bookId, @RequestParam String type, HttpSession session, org.springframework.ui.Model model) {
+    public String checkoutPage(@PathVariable Long bookId,
+                               @RequestParam String type,
+                               HttpSession session,
+                               org.springframework.ui.Model model) {
         Optional<Book> bookOpt = bookRepository.findById(bookId);
-        User user = (User) session.getAttribute("loggedInUser");
+        User user = (User) session.getAttribute("user");  // ثابت الاسم "user"
 
         if (bookOpt.isEmpty() || user == null) {
             return "redirect:/auth/login";
@@ -47,12 +49,14 @@ public class CheckoutController {
         model.addAttribute("type", type);
         model.addAttribute("user", user);
 
-        return "checkout"; 
+        return "checkout";
     }
 
     @PostMapping("/complete")
-    public String completeCheckout(@RequestParam Long bookId, @RequestParam String type, HttpSession session) {
-        User user = (User) session.getAttribute("loggedInUser");
+    public String completeCheckout(@RequestParam Long bookId,
+                                   @RequestParam String type,
+                                   HttpSession session) {
+        User user = (User) session.getAttribute("user");  // ثابت الاسم "user"
         Optional<Book> bookOpt = bookRepository.findById(bookId);
 
         if (user == null || bookOpt.isEmpty()) {
@@ -61,15 +65,13 @@ public class CheckoutController {
 
         Book book = bookOpt.get();
 
-        
         Transactions transaction = transactionsService.createTransaction(user, book, type);
 
-        
         if ("purchase".equalsIgnoreCase(type)) {
             Payment payment = new Payment();
             payment.setTransaction(transaction);
             payment.setAmount(book.getPrice());
-            payment.setPaymentMethod("Credit Card"); 
+            payment.setPaymentMethod("Credit Card");
             payment.setPaymentDate(LocalDate.now());
 
             paymentRepository.save(payment);
@@ -77,7 +79,4 @@ public class CheckoutController {
 
         return "redirect:/dashboard/history";
     }
-
-
-
 }

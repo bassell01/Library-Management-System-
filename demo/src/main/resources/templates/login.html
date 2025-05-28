@@ -3,35 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>Login - Riwaya</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
- <div class="overlay">
   <div class="container">
     <div class="left-section">
-      <!-- إضافة اللوجو -->
-      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" style="height:80px; margin-bottom:15px;" />
-      
+      <img src="/uploads/Screenshot 2025-05-27 232623.png" alt="Riwaya Logo" class="logo-img" />
       <h1>Riwaya</h1>
-      <p id="greeting" class="subtitle"></p>
+      <p class="subtitle" id="greeting"></p>
       <a href="/auth/signup">Sign Up</a>
     </div>
     <div class="right-section">
       <h2 class="animated-title">Login</h2>
       <p class="subtitle">Please enter your credentials to log in.</p>
-      <form action="#" th:action="@{/auth/login}" method="post" onsubmit="return validateLoginForm(event)">
+      <form th:action="@{/auth/login}" method="post" onsubmit="return validateLoginForm(event)">
         <input type="text" name="username" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
         <button type="submit" class="btn-black">Login</button>
       </form>
     </div>
   </div>
-</div>
-
 
   <script>
-    // Dynamic Greeting
     const greeting = document.getElementById('greeting');
     const hour = new Date().getHours();
     if(hour < 12) {
@@ -42,7 +36,6 @@
       greeting.textContent = 'Good Evening!';
     }
 
-    // Simple form validation with alert
     function validateLoginForm(event) {
       let errors = [];
       const form = event.target;

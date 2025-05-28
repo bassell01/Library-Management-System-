@@ -19,7 +19,6 @@ import com.example.lms.demo.services.TransactionsService;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -33,7 +32,7 @@ public class BookController {
     public String listBooks(Model model) {
         List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
-        return "books-list"; 
+        return "books-list";
     }
     
     @GetMapping("/{id}")
@@ -52,12 +51,12 @@ public class BookController {
                                     @RequestParam String type,
                                     HttpSession session) {
         Optional<Book> bookOpt = bookRepository.findById(id);
-        User user = (User) session.getAttribute("loggedInUser");
+        User user = (User) session.getAttribute("user");  // ثابت الاسم "user"
 
         if (bookOpt.isPresent() && user != null) {
             transactionsService.createTransaction(user, bookOpt.get(), type.toLowerCase());
-            return "redirect:/dashboard/history";  // redirect to transaction history page
+            return "redirect:/dashboard/history";
         }
-        return "error";
+        return "redirect:/auth/login";
     }
 }

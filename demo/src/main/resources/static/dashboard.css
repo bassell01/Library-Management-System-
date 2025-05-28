@@ -1,68 +1,228 @@
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-
+/* Body and html setup */
 body, html {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000; /* Black background */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-
-header {
-    background-color: #3498db;
-    padding: 30px 0;
-    text-align: center;
-    color: white;
+/* Navbar */
+.header {
+  background-color: #000;
+  padding: 15px 0;
+  border-bottom: 4px solid #8b5e3c;
+  width: 100%;
 }
 
-
-.container {
-    margin: auto;
-    padding: 30px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 600px;
+.header .container.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* horizontal padding */
 }
 
+/* Logo */
+.logo-link img.logo-img {
+  height: 80px;
+  width: auto;
+}
+
+/* Username on right */
+.username-display {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dashboard container */
+.container.dashboard-container {
+  margin: 50px auto 80px;
+  background-color: #fff;
+  color: #000;
+  padding: 60px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  max-width: 900px;
+  width: 90%;
+  text-align: center;
+}
+
+/* User Info */
+.user-info {
+  margin-bottom: 40px;
+}
 
 .label {
-    font-weight: bold;
-    color: #34495e;
+  font-weight: bold;
+  color: #8b5e3c; /* brown */
 }
-
 
 p {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #555;
+  font-size: 1.2rem;
+  margin: 14px 0;
 }
 
-
+/* Buttons */
 .button-group {
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
 }
 
 a.btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 25px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+  background-color: #8b5e3c; /* brown */
+  color: #fff;
+  padding: 14px 35px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 a.btn:hover {
-    background-color: #2980b9;
+  background-color: #4b3a29;
+  transform: translateY(-3px);
 }
 
+/* Footer */
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 40px 20px 40px 20px;
+  font-size: 1rem;
+  margin-top: 60px; 
+}
+
+
+.footer .container.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 20px; /* horizontal padding */
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #8b5e3c;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section li {
+  color: #ccc;
+  font-weight: 500;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #8b5e3c;
+}
+
+.footer-section.contact p {
+  margin-bottom: 8px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
+
+.social-icon.facebook {
+  background-image: url('/images/facebook.svg');
+}
+
+.social-icon.twitter {
+  background-image: url('/images/twitter.svg');
+}
+
+.social-icon.instagram {
+  background-image: url('/images/instagram.svg');
+}
+
+.social-icon:hover {
+  filter: brightness(0.6) invert(1);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  border-top: 1px solid #444;
+  font-weight: 600;
+  color: #777;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container.dashboard-container {
+    padding: 40px 20px;
+    width: 95%;
+  }
+
+  .footer .container.footer-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-section {
+    min-width: auto;
+  }
+}
+.footer-logo {
+  flex: 1 1 150px; /* smaller flex basis */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.footer-logo img.logo-img {
+  height: 80px; /* smaller height */
+  width: auto;
+  object-fit: contain;
+}

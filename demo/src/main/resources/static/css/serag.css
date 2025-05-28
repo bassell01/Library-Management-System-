@@ -1,60 +1,46 @@
-/* About Us and Contact Us shared styles */
-
-.about-page, .contact-page {
-  margin: 80px auto;
+/* Common container style for About, Contact, Member Home */
+.page-container {
   max-width: 1000px;
-  color: #4b3a29; /* dark brown */
+  margin: 80px auto;
+  padding: 25px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  color: #4b3a29;
 }
 
-.about-page h1, .contact-page h1 {
-  font-size: 3rem;
-  color: #8b5e3c; /* medium brown */
+/* Titles */
+.page-container h1 {
+  font-size: 2.8rem;
   font-weight: 900;
-  border-left: 8px solid #4b3a29;
-  padding-left: 12px;
+  color: #8b5e3c;
+  border-left: 8px solid #8b5e3c;
+  padding-left: 15px;
   margin-bottom: 40px;
 }
 
-/* About Us */
-
-.about-content {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.about-text {
-  flex: 1 1 400px;
+/* About Us text */
+.about-text, .contact-text {
   font-size: 1.3rem;
   line-height: 1.7;
   background: #f4efe8; /* light beige */
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(139, 94, 60, 0.3);
+  margin-bottom: 40px;
 }
 
-.about-image {
-  flex: 1 1 400px;
-}
-
+/* About Us image */
 .about-image img {
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(75, 54, 35, 0.5);
   object-fit: cover;
-}
-
-/* Contact Us */
-
-.contact-subtitle {
-  font-size: 1.4rem;
   margin-bottom: 40px;
-  color: #5c4a2d; /* medium brown */
 }
 
+/* Contact cards container */
 .contact-cards {
   display: flex;
   gap: 30px;
@@ -63,6 +49,7 @@
   margin-bottom: 50px;
 }
 
+/* Each contact card */
 .contact-card {
   background: #f4efe8;
   padding: 25px 20px;
@@ -71,6 +58,7 @@
   flex: 1 1 250px;
   text-align: center;
   color: #4b3a29;
+  font-size: 1.1rem;
 }
 
 .contact-card h3 {
@@ -78,13 +66,7 @@
   margin-bottom: 15px;
 }
 
-.contact-card p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-}
-
-/* Contact form */
-
+/* Contact form styling */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -127,17 +109,17 @@
   box-shadow: 0 0 15px #4b3a29;
 }
 
-/* Responsive */
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .about-content,
+  .page-container {
+    margin: 40px 15px;
+    padding: 20px;
+  }
+  .about-text, .about-image, .contact-card {
+    flex: 1 1 100%;
+    margin-bottom: 30px;
+  }
   .contact-cards {
     flex-direction: column;
-  }
-
-  .about-text,
-  .about-image,
-  .contact-card {
-    flex: 1 1 100%;
   }
 }
